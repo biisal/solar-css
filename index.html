@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System</title>
+    <!-- CSS link -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: repeating-linear-gradient(black, rgb(2, 22, 22), black);
+
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .solar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            scale: 0.7;
+            transition: all 0.4s ease;
+        }
+
+        .jupiter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 607.81px;
+            width: 607.81px;
+            border-radius: 50%;
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.418);
+            animation: rotate-an 100s linear infinite;
+            transition: all 0.4s ease;
+        }
+
+        .jupiter::before {
+            content: "";
+            transition: all 0.4s ease;
+            height: 113.91px;
+            width: 113.91px;
+            border-radius: 50%;
+            background-color: #507992;
+            left: 50%;
+            top: -50px;
+            position: absolute;
+            box-shadow: 0px 0px 30px 3px #507992b7;
+        }
+
+
+
+        .mars {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 228.3px;
+            width: 228.3px;
+            border-radius: 50%;
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.354);
+            animation: rotate-an 20s linear infinite;
+        }
+
+        .mars::before {
+            content: "";
+            height: 5.56px;
+            width: 5.56px;
+            border-radius: 50%;
+            background-color: #c1440e;
+            left: 50%;
+            top: -3px;
+            position: absolute;
+            box-shadow: 0px 0px 30px 3px #c1440e;
+        }
+
+        .earth {
+            height: 118.54px;
+            width: 118.54px;
+            border-radius: 50%;
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.354);
+            animation: rotate-an 10s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earth::before {
+            content: "";
+            height: 10.47px;
+            width: 10.47px;
+            border-radius: 50%;
+            background-color: #0088ff;
+            left: 50%;
+            top: -5px;
+            position: absolute;
+            box-shadow: 0px 0px 20px 2px #4f4cb0;
+        }
+
+        .venus {
+            animation: rotate-an 6.25s linear infinite;
+            height: 100px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.354);
+
+            justify-content: center;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .venus::before {
+            content: "";
+            height: 9.93px;
+            width: 9.93px;
+            border-radius: 50%;
+            background-color: #a57c1b;
+            left: 50%;
+            top: -4.5px;
+            position: absolute;
+            box-shadow: 0px 0px 20px 2px #a57c1b;
+        }
+
+        .mercury {
+            animation: rotate-an 2.4s linear infinite;
+            height: 80px;
+            width: 80px;
+            display: flex;
+            border: 1px solid rgba(255, 255, 255, 0.354);
+
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .mercury::before {
+            content: "";
+            height: 4px;
+            width: 4px;
+            border-radius: 50%;
+            background-color: #e7e8ec;
+            left: 50%;
+            top: -2.5px;
+            position: absolute;
+            box-shadow: 0px 0px 20px 2px #e7e8ec;
+        }
+
+        .sun {
+            height: 60px;
+            width: 60px;
+            background: radial-gradient(circle, rgb(255, 101, 101), red);
+            border-radius: 50%;
+            box-shadow: 0px 0px 100px 10px rgb(255, 0, 4);
+        }
+
+        .buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        button {
+            padding: 6px 10px;
+            height: 32px;
+            width: 100px;
+            font-weight: 600;
+            background-color: transparent;
+            outline: none;
+            border: 1.5px solid red;
+            color: rgb(255, 255, 255);
+            border-radius: 6px;
+            transition: all ease 0.4s;
+            cursor: pointer;
+
+        }
+
+        button:hover {
+            color: rgb(255, 255, 255);
+            background-color: red;
+            box-shadow: 0px 0px 30px 1px red;
+            text-shadow: 0px 6px 30px white;
+        }
+
+        .rotate-phn {
+            height: 100vh;
+            width: 100vh;
+            position: absolute;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 30px;
+            background-color: rgba(47, 55, 56, 0.658);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            word-spacing: 20px;
+            color: #e7e8ec;
+
+        }
+
+        @keyframes rotate-an {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width : 511px) {
+            .rotate-phn {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rotate-phn">
+        <h1>Rotate Your Mobile</h1>
+    </div>
+    <div class="solar">
+        <div class="jupiter"></div>
+        <div class="mars"></div>
+        <div class="earth"></div>
+        <div class="venus"></div>
+        <div class="mercury"></div>
+        <div class="sun"></div>
+    </div>
+    <div class="buttons">
+        <button onclick="zoomin(this)" onmouseenter="hover(this)" onmouseleave="unhover(this)">ZOOM IN</button>
+    </div>
+</body>
+<script>
+    function zoomin(element) {
+        //element.style.backgroundColor = "blue"
+
+        let solar = document.querySelector(".solar")
+        let jupiter = document.querySelector(".jupiter")
+        let currentScale = parseFloat(solar.style.transform.replace("scale(", "").replace(")", ""));
+        if (currentScale === 2.4) {
+            jupiter.style.visibility = "visible"
+            solar.style.transform = "scale(1)";
+            element.innerText = 'ZOOM IN'
+            element.style.border = "2px solid red"
+            element.style.backgroundColor = 'red'
+            element.style.boxShadow = "0px 0px 30px 1px red"
+            jupiter.style.height = "607.81px";
+            jupiter.style.width = "607.81px";
+        }
+        else {
+            jupiter.style.height = "1607.81px";
+            jupiter.style.width = "1607.81px";
+            solar.style.transform = "scale(2.4)";
+            element.innerText = 'ZOOM OUT'
+            element.style.border = "2px solid blue"
+            element.style.backgroundColor = 'blue'
+            element.style.boxShadow = "0px 0px 30px 1px blue"
+            jupiter.style.visibility = "hidden"
+
+        }
+
+
+    }
+    function hover(element) {
+        text = element.innerText.trim()
+        if (text === 'ZOOM IN') {
+            //element.style.border = "2px solid red"
+            element.style.backgroundColor = "red"
+            element.style.boxShadow = "0px 0px 30px 1px red"
+        }
+        else {
+            //element.style.border = "2px solid red"
+            element.style.backgroundColor = 'blue'
+            element.style.boxShadow = "0px 0px 30px 1px blue"
+        }
+    }
+    function unhover(element) {
+        text = element.innerText.trim()
+        if (text === 'ZOOM IN') {
+            element.style.border = "2px solid red"
+            element.style.backgroundColor = "transparent"
+            element.style.boxShadow = "none"
+        }
+        else {
+            //element.style.border = "2px solid red"
+            element.style.backgroundColor = 'blue'
+            element.style.backgroundColor = "transparent"
+            element.style.boxShadow = "none"
+        }
+    }
+
+</script>
+
+</html>
